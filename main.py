@@ -1,21 +1,34 @@
-def create_player_for_team(name, xp, team):
-    return
 
-def create_player(name, xp, team):
-    return { 
-        "name": name,
-        "XP": xp,
-        "team": team}
+class GuardDog:
 
-def introduct_player(player):
-    name = player["name"]
-    team = player["team"]
-    print(f"Hello! My name is {name} and I play for {team}")
+    def __init__(self, name, breed):
+        self.name = name
+        self.age = 5
+        self.breed = breed
 
-geon = create_player("taegeon", 1500, "T1")
-tae = create_player("leetae", 15000, "DRX")
+    def grr(self):
+        print("stay away!")
 
-teams = {
-    "T1" : [geon],
-    "DRX" : [tae]
-}
+class Puppy:
+
+    def __init__(self, name, breed):
+        self.name = name
+        self.age = 0.1
+        self.breed = breed
+
+    def __str__(self):
+        return f"{self.breed} named {self.name}"
+    
+    def woof_woof(self):
+        print("Woof Woof!")
+
+    def introduce(self):
+        self.woof_woof()
+        print(f"my name is {self.name} and i am a baby {self.breed}")
+        self.woof_woof()
+
+ruffus = Puppy(name="Ruffus", breed="Beagle")
+bibi = Puppy(name="Bibi", breed="Dalmatian")
+
+ruffus.introduce()
+bibi.introduce()
