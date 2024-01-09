@@ -1,36 +1,56 @@
-class Dog:
+class Player:
 
-    def __init__(self, name, breed, age):
+    def __init__(self, name, team):
         self.name = name
-        self.breed = breed
-        self.age = age
+        self.xp = 1500
+        self.team = team
 
-    def sleep(self):
-         print("zzzzzz....")
+    def introduce(self):
+        print(f"Hello! I'm {self.name} and I play for {self.team}")
 
-class GuardDog(Dog):
+class Team:
 
-    def __init__(self, name, breed):
-            super().__init__(name, breed, 5)
-            self.aggresive = True
+    def __init__(self, team_name):
+        self.team_name = team_name
+        self.players = []
 
-    def grr(self):
-        print("stay away!")
+    def add_player(self, name):
+        new_player = Player(name, self.team_name)
+        self.players.append(new_player)
 
-class Puppy(Dog):
-
-    def __init__(self, name, breed):
-        super().__init__(name, breed, 0.1)
-        self.spoiled = True
-
+    def remove_player(self, name):
+        for remove_player in self.players:
+            if remove_player.name == name:
+                self.players.remove(remove_player)
+                print(f"{name} was expelled from the team {self.team_name}")
+                return
+        print("Cant find player")
     
-    def woof_woof(self):
-        print("Woof Woof!")
+    def team_xp(self):
+        team_xp = 0
+        for player in self.players:
+            team_xp += player.xp
+            print(f"🍀 {player.name} contributes || {player.xp} || xp for {self.team_name}! \n Thank you for your dedication.")
+        print(f"🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉 \n {self.team_name}'s total xp is {team_xp} \n🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉")
+        
+    
+    def show_players(self):
+        for player in self.players:
+            player.introduce()
 
-   
+team_t1 = Team("SKT T1")
 
-ruffus = Puppy(name="Ruffus", breed="Beagle")
-bibi = GuardDog(name="Bibi", breed="Dalmatian")
+team_t1.add_player("geon")
+team_t1.add_player("Faker")
 
-ruffus.sleep()
-bibi.sleep()
+team_t1.remove_player("geon")
+team_t1.show_players()
+team_t1.add_player("geon")
+team_t1.add_player("Oner")
+
+team_blue = Team("DRX")
+
+team_blue.add_player("Beryl")
+
+team_t1.team_xp()
+team_blue.team_xp()
