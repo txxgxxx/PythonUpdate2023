@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 import time
 from bs4 import BeautifulSoup
+import csv
 
 p = sync_playwright().start()
 
@@ -11,25 +12,6 @@ page = browser.new_page()
 # 새 탭 실행
 
 page.goto("https://www.wanted.co.kr/search?query=flutter&tab=position")
-# 첫 번째 argument가 url, positional argument를 사용한 것
-
-# time.sleep(5)
-
-# page.click("button.Aside_searchButton__Xhqq3")
-
-# time.sleep(5)
-
-# page.get_by_placeholder("검색어를 입력해 주세요.").fill("flutter")
-
-# time.sleep(5)
-
-# page.keyboard.down("Enter")
-
-# time.sleep(5)
-
-# page.click("a#search_tab_position")
-
-# time.sleep(5)
 
 for x in range(5):
     time.sleep(5)
@@ -61,5 +43,16 @@ for job in jobs:
     }
     jobs_db.append(job_data)
 
-print(jobs_db)
-print(len(jobs_db))
+
+file = open("jobs.csv", mode="w", encoding="utf-8")
+
+writer = csv.writer(file)
+writer.writerow(["Title",
+                "Company", 
+                "Location", 
+                "Reward", 
+                "Link"]
+                )
+
+for job in jobs_db:
+    writer.writerow(job.values())
